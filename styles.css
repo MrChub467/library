@@ -1,0 +1,72 @@
+*, 
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+:root {
+  --background: #c2b5ec;
+  --light-brown: #c9834e;
+  --brown: #b97540;
+  --dark-brown: #9b6339;
+  --darker-brown: #5a2e0e;
+  --shadow: rgba(65, 64, 50, 0.2);
+  --shelf-depth: 3vmin;
+}
+
+body {
+  height: 100vh;
+  background-color: blanchedalmond;
+}
+
+.bookshelf-con {
+  display: grid;
+  min-height: 100vh;
+  
+}
+
+#vertical-line {
+  border-right: 10px solid var(--darker-brown);
+  height: 80vmin;
+  position: absolute;
+  place-self: center;
+  z-index: 1;
+}
+
+.bookshelf{
+  place-self: center;
+  height: 80vmin;
+  aspect-ratio: 2/2.5;
+  background-color: var(--brown);
+  border: var(--darker-brown) 2vmin solid;
+  border-radius: 3vmin 3vmin 1vmin 1vmin;
+  box-shadow: 4vmin 1vmin var(--shadow),
+    inset var(--shelf-depth) 0vmin var(--light-brown),
+    inset calc(var(--shelf-depth) * -1) 0vmin var(--light-brown);
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10px;
+}
+
+.shelf {
+  max-width: 100%;
+  border-bottom: var(--shelf-depth) solid var(--dark-brown);
+  
+  
+  box-shadow: 0 1vmin var(--darker-brown);
+}
+
+.read {
+  border-left: var(--shelf-depth) solid transparent;
+  
+}
+
+.unread {
+  border-right: var(--shelf-depth) solid transparent;
+  
+}

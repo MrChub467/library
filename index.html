@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Library</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="container">
       <div class="bookshelf-con">
-        <div id="vertical-line"></div>
         <div class="bookshelf">
           <div class="shelf read"></div>
           <div class="shelf unread"></div>
@@ -17,6 +16,50 @@
           <div class="shelf unread"></div>
           <div class="shelf read"></div>
           <div class="shelf unread"></div>
+        </div>
+        <div id="vertical-line"></div>
+      </div>
+      <div class="model-con">
+        <a class="modal-open" href="#modal">Click to Add a Book</a>
+        <div class="modal" id="modal">
+          <div class="modal-content">
+            <a href="#" class="modal-close" title="Close Modal">X</a>
+            <h3>Add Book</h3>
+            <div class="modal-area">
+              <form action="#" method="post">
+                <div class="input">
+                  <label for="title">Book Title*</label>
+                  <input type="text" id="title" required>
+                </div>
+                <div class="input">
+                  <label for="author">Author</label>
+                  <input type="text" id="author">
+                </div>
+                <div class="input">
+                  <label for="pages">Number of Pages</label>
+                  <input type="number" id="pages">
+                </div>
+                <div class="read-con">
+                  <h5>Have you read this book? *</h5>
+                  <div class="read-book">
+                    <div>
+                      <input type="radio" id="read" name="read-status" required>
+                      <label for="read">Read</label>
+                    </div>
+                    <div>
+                      <input type="radio" name="read-status" id="not-read" required>
+                      <label for="not-read">Not Read</label>
+                    </div>
+                    <!-- <div>
+                      <input type="radio" name="read-status" id="in-progress">
+                      <label for="in-progress">In Progress</label>
+                    </div> -->
+                  </div>
+                </div>
+                <button type="submit" class="form-submit">Submit</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

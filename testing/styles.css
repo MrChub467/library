@@ -48,7 +48,7 @@
 .top {
     width: 50px;
     height: 190px;
-    top: -2px;  /* hmm, why -2 and not 0? */
+    top: 0;
     background-image: linear-gradient(90deg, white 90%, gray 10%);
     background-size: 5px 5px;
     transform: rotateX(90deg) translateZ(95px) translateY(-95px);

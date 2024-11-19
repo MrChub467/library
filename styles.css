@@ -56,25 +56,25 @@ body {
   position: relative;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   row-gap: 10px;
 }
 
 .shelf {
   max-width: 100%;
   border-bottom: var(--shelf-depth) solid var(--dark-brown);
+  border-left: var(--shelf-depth) solid transparent;
+  border-right: var(--shelf-depth) solid transparent;
   
   
   box-shadow: 0 1vmin var(--darker-brown);
 }
 
 .read {
-  border-left: var(--shelf-depth) solid transparent;
   
 }
 
 .unread {
-  border-right: var(--shelf-depth) solid transparent;
   
 }
 

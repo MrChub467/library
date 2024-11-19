@@ -26,9 +26,7 @@ body {
   font-family: "Cantarell", sans-serif;
 }
 
-.container {
-  
-}
+
 
 .bookshelf-con {
   display: grid;
@@ -36,12 +34,7 @@ body {
   
 }
 
-#vertical-line {
-  border-right: 10px solid var(--darker-brown);
-  height: 80vmin;
-  position: absolute;
-  place-self: center;
-}
+
 
 .bookshelf{
   place-self: center;
@@ -68,14 +61,6 @@ body {
   
   
   box-shadow: 0 1vmin var(--darker-brown);
-}
-
-.read {
-  
-}
-
-.unread {
-  
 }
 
 .model-con {

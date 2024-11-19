@@ -1,13 +1,6 @@
-* {
-    box-sizing: border-box;
-}
 
-.bookshelf {
-    width: 100%;
-    margin-top: 32px;
-    display: flex;
-    flex-wrap: wrap;
-}
+
+
 
 
 .side {
@@ -42,7 +35,7 @@
     position: absolute;
     color: goldenrod;
     bottom: 0px;
-    left: 20%; /* no idea why 20% centers it */
+    left: 20%; 
 }
 
 .top {
@@ -63,6 +56,7 @@
     transform: translateZ(0) rotateY(0);
     transition: all 1s ease;
     cursor: pointer;
+
 }
 .cover {
     position: absolute;
@@ -104,15 +98,16 @@
     transform: rotateX(-15deg)  perspective(2000px) translateZ(100px);
 }
 
-input {
+.bookshelf input {
     display: none;
+    position: relative;
 }
 
-input:checked + .book{
-    transform: rotateY(-90deg) translateY(300px);
+.bookshelf input:checked + label.book{
+    transform: rotateY(-90deg) translateY(300px) translateZ(-300px);
 }
 
-input:checked + .book .cover:hover {
+.bookshelf input:checked + label.book .cover:hover {
     transform: rotateY(-75deg);  
 }
 

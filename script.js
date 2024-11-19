@@ -1,6 +1,9 @@
 const myLibrary = [];
-const shelfHeight = document.querySelector("shelf1").getBoundingClientRect().height;
-const shelfWidth = document.querySelector("shelf1").getBoundingClientRect().width;
+const shelf = document.querySelector(".shelf1");
+const shelfHeight = shelf.getBoundingClientRect().height;
+const shelfWidth = shelf.getBoundingClientRect().width;
+
+
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -15,7 +18,10 @@ function addBookToLibrary(book) {
     const width = getBookDimensions(book.pages);
     const shelf = doesBookFit(width);
     const theShelf = document.querySelector(shelf);
-
+    console.log(width);
+    console.log(shelf)
+    
+    
     const input = document.createElement("input");
     setAttributes(input, {"type": "radio", "name": "book", "id": "book"})
     theShelf.appendChild(input);
@@ -54,7 +60,7 @@ function addBookToLibrary(book) {
 
 function getBookDimensions(pages) {
     let width = 20
-    let height = (shelfHeight - 20) + "px";
+    //let height = (shelfHeight - 20) + "px";
 
     switch(true) {
         case pages > 500:
@@ -76,19 +82,19 @@ function getBookDimensions(pages) {
 }
 
 function doesBookFit(bookWidth) {
-    if (getShelfFill("shelf1") + bookWidth > shelfWidth) {
-        return "shelf1"
-    } else if (getShelfFill("shelf2") + bookWidth > shelfWidth) {
-        return "shelf2"
-    } else if (getShelfFill("shelf3") + bookWidth > shelfWidth) {
-        return "shelf3"
+    if (getShelfFill(".shelf1") + bookWidth < shelfWidth) {
+        return ".shelf1"
+    } else if (getShelfFill(".shelf2") + bookWidth < shelfWidth) {
+        return ".shelf2"
+    } else if (getShelfFill(".shelf3") + bookWidth < shelfWidth) {
+        return ".shelf3"
     } else {
         return "Bookshelf Full"
     }
 }
 
 function getShelfFill(shelf) {
-    let children = document.querySelector(shelf).children;
+    let children = Array.from(document.querySelector(shelf).children);
     let totalWidth = 0;
     children.forEach(child => {
         totalWidth += child.getBoundingClientRect().width;
@@ -116,7 +122,7 @@ form.addEventListener("submit", (e) => {
     
     // form.reset();
     myLibrary.push(newBook);
-    // addBookToLibrary(newBook);
+    addBookToLibrary(newBook);
 
     console.dir(myLibrary);
 

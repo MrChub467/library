@@ -54,7 +54,7 @@ body {
 }
 
 .shelf {
-  max-width: 100%;
+  width: 100%;
   border-bottom: var(--shelf-depth) solid var(--dark-brown);
   border-left: var(--shelf-depth) solid transparent;
   border-right: var(--shelf-depth) solid transparent;
@@ -62,6 +62,8 @@ body {
   
   box-shadow: 0 1vmin var(--darker-brown);
 }
+
+
 
 .model-con {
   position: absolute;

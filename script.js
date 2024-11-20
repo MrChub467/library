@@ -2,42 +2,49 @@ const myLibrary = [];
 const shelf = document.querySelector(".shelf1");
 const shelfHeight = shelf.getBoundingClientRect().height;
 const shelfWidth = shelf.getBoundingClientRect().width;
+let isBookPulledOut = false;
+let bookPulledOut;
 
 
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-
+    this.id = id;
 
 }
 
 function addBookToLibrary(book) {
-    const width = getBookDimensions(book.pages);
+    const width = getBookWidth(book.pages);
+    const height = getBookHeight(book.pages);
     const shelf = doesBookFit(width);
-    const theShelf = document.querySelector(shelf);
-    console.log(width);
-    console.log(shelf)
-    
+    const theShelf = document.querySelector(shelf);   
     
     const input = document.createElement("input");
-    setAttributes(input, {"type": "radio", "name": "book", "id": "book"})
+    setAttributes(input, {"type": "checkbox", "name": "book", "id": "book" + book.id})
+    input.addEventListener("change", () => {
+        checkForPulledOutBook("#" + input.id);
+    });
     theShelf.appendChild(input);
 
     const label = document.createElement("label");
-    setAttributes(label, {"for": "book", "class": "book"})
+    setAttributes(label, {"for": "book" + book.id, "class": "book"})
+    label.style.width = width + "px";
+    label.style.height = height + "px";
 
     const spine = document.createElement("div");
     spine.classList.add("side", "spine");
 
     const title = document.createElement("span");
     title.classList.add("title");
+    title.textContent = book.title;
     spine.appendChild(title);
 
     const author = document.createElement("span");    
     author.classList.add("author");
+    author.textContent = book.author;
     spine.appendChild(author);
     label.appendChild(spine);
     
@@ -47,20 +54,69 @@ function addBookToLibrary(book) {
 
     const content = document.createElement("div");
     content.classList.add("side", "content");
-    content.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit tempore repellat nulla autem numquam enim at. Accusamus, at exercitationem dicta, libero beatae, odio architecto consectetur sapiente temporibus recusandae deserunt illum?"
+    content.innerHTML = `
+        <div>Title - ${book.title} </div>
+        <div>Author - ${book.author} </div>
+        <div>Pages - ${book.pages} </div>
+
+    `
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove Book";
+    removeBtn.classList.add("remove-btn");
+    removeBtn.addEventListener("click", () => {
+        input.remove();
+        label.remove();
+        bookPulledOut = "";
+        isBookPulledOut = false;
+        // FIX REMOVE BOOK FROM ARRAY
+    });
+    content.appendChild(removeBtn);
     label.appendChild(content);
+
+    
 
     const cover = document.createElement("div");
     cover.classList.add("side", "cover");
+    cover.style.left = width + "px";
     label.appendChild(cover);
+
 
     theShelf.appendChild(label);
     
 }
 
-function getBookDimensions(pages) {
+//------ Only allows one book to be pulled out at once ------\\
+function checkForPulledOutBook(id) {
+    if (!isBookPulledOut) {
+        isBookPulledOut = true;
+        bookPulledOut = id;
+    } else if (bookPulledOut === id) {
+        isBookPulledOut = false;
+        bookPulledOut = "";
+    } else {
+        document.querySelector(bookPulledOut).checked = false;
+        bookPulledOut = id;
+    }
+}
+
+
+function giveBookNumber() {
+    if (myLibrary.length === 0) return 0;
+    let foundId;
+    for (let i = 0; i < myLibrary.length + 1; i++) {
+        foundId = true;
+        for (const book of myLibrary) {
+            if (i === book.id) {
+                foundId = false;
+                break;
+            }
+        }
+        if (foundId) return i;
+    }
+}
+
+function getBookWidth(pages) {
     let width = 20
-    //let height = (shelfHeight - 20) + "px";
 
     switch(true) {
         case pages > 500:
@@ -76,17 +132,20 @@ function getBookDimensions(pages) {
             width = 30;
             break;
     }
-
     return width;
+}
 
+function getBookHeight(pages) {
+    let height = shelfHeight - 50
+    return height;
 }
 
 function doesBookFit(bookWidth) {
-    if (getShelfFill(".shelf1") + bookWidth < shelfWidth) {
+    if (getShelfFill(".shelf1") + bookWidth < shelfWidth - 40) {
         return ".shelf1"
-    } else if (getShelfFill(".shelf2") + bookWidth < shelfWidth) {
+    } else if (getShelfFill(".shelf2") + bookWidth < shelfWidth - 40) {
         return ".shelf2"
-    } else if (getShelfFill(".shelf3") + bookWidth < shelfWidth) {
+    } else if (getShelfFill(".shelf3") + bookWidth < shelfWidth - 40) {
         return ".shelf3"
     } else {
         return "Bookshelf Full"
@@ -118,7 +177,8 @@ form.addEventListener("submit", (e) => {
     const author = formData.get("author");
     const pages = formData.get("pages");
     const read = formData.get("read");
-    const newBook = new Book(title, author, pages, read);
+    const idNumber = giveBookNumber();
+    const newBook = new Book(title, author, pages, read, idNumber);
     
     // form.reset();
     myLibrary.push(newBook);
@@ -128,13 +188,11 @@ form.addEventListener("submit", (e) => {
 
 })
 
-// Need function to put the book back when clicked because it is a radio input
 
 // Need to edit addBookToLibrary function to add the book to the screen
     // Function to get the size of the book given the number of pages
-    // Set attributes function
-    // Function to set a number to the elements for easy access
-    // Function to check to see if a shelf if full, if it is go to the next one
+
+
 
 // Maybe add a function to be able to drag books around
 

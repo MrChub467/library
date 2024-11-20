@@ -50,17 +50,20 @@ body {
 
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   row-gap: 10px;
 }
 
 .shelf {
   width: 100%;
+  
   border-bottom: var(--shelf-depth) solid var(--dark-brown);
   border-left: var(--shelf-depth) solid transparent;
   border-right: var(--shelf-depth) solid transparent;
-  
-  
   box-shadow: 0 1vmin var(--darker-brown);
+  
+  display: flex;
+  align-items: flex-end;
 }
 
 

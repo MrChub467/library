@@ -10,7 +10,7 @@
     font-weight: bold;
     color: black;
     text-align: center;
-    transform-origin: center left;
+    /* transform-origin: left; */
 }
 
 .spine {
@@ -18,11 +18,17 @@
     width: 100%;
     height: 100%;
     background-color: orange;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    
 }
 
 .title {
-    margin: 2px;
     
+    margin-top: 6px;
     top: 0px;
     left: 0px;
     font-size: 12px;
@@ -32,36 +38,39 @@
 }
 
 .author {
-    position: absolute;
+    
     color: goldenrod;
-    bottom: 0px;
-    left: 20%; 
+    
+    
+    overflow-wrap: break-word;
 }
 
 .top {
+    position: absolute;
     width: 100%;
-    height: 190px;
-    top: 0;
+    height: 120px;
+    
+    transform-origin: 0 0;
+    
+    
     background-image: linear-gradient(90deg, white 90%, gray 10%);
     background-size: 5px 5px;
-    transform: rotateX(90deg) translateZ(95px) translateY(-95px);
+    transform: rotateX(90deg) translateY(-120px);
 }
 
-.book {
-    width: 50px;
-    height: 280px;
+.book { 
     position: relative;
     margin-left: 1px;
     transform-style: preserve-3d;
     transform: translateZ(0) rotateY(0);
     transition: all 1s ease;
     cursor: pointer;
-
+    bottom: -15px;
 }
 .cover {
     top: 0;
     left: 50px;
-    width: 190px;
+    width: 120px;
     height: 100%;
     background-color: grey;
     transform-origin: left;
@@ -81,8 +90,10 @@
 }
 
 .content {
-    width: 190px;
+    width: 120px;
     height: 100%;
+    font-size: 12px;
+    
     top: 0;
     padding: 10px;
     transform: rotateY(90deg) perspective(2000px) rotateZ(0);
@@ -92,6 +103,7 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: #E5CBBA;
+    transform-origin: left;
 }
 
 .remove-btn {
@@ -109,8 +121,8 @@
 
 input:checked + label.book{
     transform: rotateY(-90deg) translateY(300px) translateZ(-300px);
-}
 
+}
 input:checked + label.book .cover:hover{
     transform: rotateY(-75deg);  
     

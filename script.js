@@ -29,6 +29,7 @@ function Book(title, author, pages, read, id) {
     this.read = read;
     this.id = id;
     this.spine;
+    this.btn;
 
 }
 
@@ -68,7 +69,6 @@ function addBookToLibrary(book) {
     
     const top = document.createElement("div");
     top.classList.add("side", "top");
-    
     label.appendChild(top);
 
     const content = document.createElement("div");
@@ -79,9 +79,10 @@ function addBookToLibrary(book) {
         <div>Pages - ${book.pages} </div>
 
     `
+    const btnContainer = document.createElement("div");
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove Book";
-    removeBtn.classList.add("remove-btn");
+    removeBtn.classList.add("content-btn");
     removeBtn.addEventListener("click", () => {
         input.remove();
         label.remove();
@@ -89,7 +90,18 @@ function addBookToLibrary(book) {
         isBookPulledOut = false;
         // FIX REMOVE BOOK FROM ARRAY
     });
-    content.appendChild(removeBtn);
+    const colorChangeBtn = document.createElement("button");
+    this.btn = colorChangeBtn;
+    colorChangeBtn.textContent = "Change Read";
+    colorChangeBtn.classList.add("content-btn");
+    colorChangeBtn.addEventListener("click", () => {
+        if (book.read === "read") book.read = "not-read"
+        else {book.read = "read"}
+        book.changeColor();
+    });
+    btnContainer.appendChild(colorChangeBtn);
+    btnContainer.appendChild(removeBtn)
+    content.appendChild(btnContainer);
     label.appendChild(content);
 
     

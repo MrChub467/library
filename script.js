@@ -5,7 +5,22 @@ const shelfWidth = shelf.getBoundingClientRect().width;
 let isBookPulledOut = false;
 let bookPulledOut;
 
+Book.prototype = {
+    changeColor: function() {
+        if (this.read === "read") {
+            this.spine.style.backgroundColor = `hsl(120 ${getRandomColor(50, 100)} ${getRandomColor(30, 75)})`;
+        } else {
+            this.spine.style.backgroundColor = `hsl(360 ${getRandomColor(50, 100)} ${getRandomColor(30, 75)})`;
+        }
+    }
+    
+ };
 
+function getRandomColor(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
 
 function Book(title, author, pages, read, id) {
     this.title = title;
@@ -13,12 +28,13 @@ function Book(title, author, pages, read, id) {
     this.pages = pages;
     this.read = read;
     this.id = id;
+    this.spine;
 
 }
 
 function addBookToLibrary(book) {
     const width = getBookWidth(book.pages);
-    const height = getBookHeight(book.pages);
+    const height = shelfHeight - 20;
     const shelf = doesBookFit(width);
     const theShelf = document.querySelector(shelf);   
     
@@ -46,10 +62,13 @@ function addBookToLibrary(book) {
     author.classList.add("author");
     author.textContent = book.author;
     spine.appendChild(author);
+    book.spine = spine;
+    book.changeColor();
     label.appendChild(spine);
     
     const top = document.createElement("div");
     top.classList.add("side", "top");
+    
     label.appendChild(top);
 
     const content = document.createElement("div");
@@ -119,12 +138,6 @@ function getBookWidth(pages) {
     let width = 20
 
     switch(true) {
-        case pages > 500:
-            width = 60;
-            break;
-        case pages > 400:
-            width = 50;
-            break;
         case pages > 300:
             width = 40;
             break;
@@ -136,7 +149,7 @@ function getBookWidth(pages) {
 }
 
 function getBookHeight(pages) {
-    let height = shelfHeight - 50
+    let height = shelfHeight;
     return height;
 }
 

@@ -106,7 +106,15 @@
     transform-origin: left;
 }
 
-.remove-btn {
+.content-btn {
+    border-radius: 5px;
+}
+
+.read {
+
+}
+
+.unread {
     
 }
 

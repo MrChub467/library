@@ -80,6 +80,7 @@ function addBookToLibrary(book) {
 
     `
     const btnContainer = document.createElement("div");
+    btnContainer.classList.add("btn-con");
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove Book";
     removeBtn.classList.add("content-btn");

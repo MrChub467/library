@@ -106,17 +106,21 @@
     transform-origin: left;
 }
 
+
+
 .content-btn {
-    border-radius: 5px;
+    border-radius: 2px;
+    border: none;
+    margin-top: 4px;
+    font-size: 10px;
 }
 
-.read {
-
+.content-btn:hover {
+    background-color: rgb(192, 192, 192);
+    transform: translateY(-2px);
+    transition: all 0.5s ease;
 }
 
-.unread {
-    
-}
 
 .book:hover {
     transform: rotateX(-15deg)  perspective(2000px) translateZ(100px);
@@ -133,6 +137,15 @@ input:checked + label.book{
 }
 input:checked + label.book .cover:hover{
     transform: rotateY(-75deg);  
+    
+}
+
+.book:has(.content:hover) .cover {
+    transform: rotateY(-75deg);  
+    
+}
+.book:has(.content:hover) .content {
+    box-shadow: inset 15px 0 20px rgba(0, 0, 0, 0.4);
     
 }
 

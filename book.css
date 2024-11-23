@@ -132,7 +132,7 @@
 }
 
 input:checked + label.book{
-    transform: rotateY(-90deg) translateY(300px) translateZ(-300px);
+    transform: rotateY(-90deg) translateZ(-200px);
 
 }
 input:checked + label.book .cover:hover{
